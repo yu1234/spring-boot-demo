@@ -12,16 +12,14 @@ public class User {
     private String password;
     private int age;
     private boolean deleteFlag;
+    private String roles;
 
     public User() {
     }
 
-    public User(String id, String name, String password, int age, boolean deleteFlag) {
-        this.id = id;
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
-        this.age = age;
-        this.deleteFlag = deleteFlag;
     }
 
     public String getId() {
@@ -62,5 +60,13 @@ public class User {
 
     public void setDeleteFlag(boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }
