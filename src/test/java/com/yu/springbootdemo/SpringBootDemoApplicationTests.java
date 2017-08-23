@@ -10,10 +10,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -37,6 +39,8 @@ public class SpringBootDemoApplicationTests {
     }
 
     @Test
+    @Rollback
+    @Transactional(rollbackFor = Exception.class)
     public void testUserController() throws Exception {
         // 测试UserController
         RequestBuilder request = null;
@@ -59,7 +63,6 @@ public class SpringBootDemoApplicationTests {
         request = get("/users/");
         mvc.perform(request)
                 .andExpect(status().isOk()).andDo(print());
-
         // 4、put修改id为1的user
         request = put("/users/1")
                 .param("name", StringUtils.createRandomStr(3))
