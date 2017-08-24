@@ -1,5 +1,6 @@
 package com.yu.springbootdemo.config;
 
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,12 @@ public class GlobalExceptionHandler {
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
         mav.setViewName(DEFAULT_ERROR_VIEW);
+        return mav;
+    }
+    @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
+    public ModelAndView requestMethodNotSupportedErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/login");
         return mav;
     }
 }

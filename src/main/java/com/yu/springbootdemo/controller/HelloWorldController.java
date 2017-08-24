@@ -19,7 +19,7 @@ public class HelloWorldController {
     private UserMapper userMapper;
 
     @ApiOperation(value = "spring boot test 首页", notes = "跳转到首页")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value ={ "/","/index"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
